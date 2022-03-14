@@ -9,7 +9,7 @@ csv_file = r'csv_editavel.csv'
 
 def rename_file(file):
 
-    matricula_csv = pd.read_csv(csv_file, sep=',', usecols=['matricula', 'img'])
+    matricula_csv = pd.read_csv(csv_file, sep=',', encoding = 'iso-8859-1', usecols=['matricula', 'img'])
     check_matriculas = matricula_csv.loc[0:, 'matricula'].to_list()
     check_row_img = matricula_csv.loc[0:,'img'].to_list()
 
