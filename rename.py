@@ -14,7 +14,7 @@ def rename_file(file):
     check_row_img = matricula_csv.loc[0:,'img'].to_list()
 
     for row_file in check_row_img:
-
+        
         if file == row_file:
             for row in check_matriculas:
                 matricula_index = check_matriculas.index(row)
@@ -32,14 +32,22 @@ def rename_file(file):
                     continue
         else:
             continue
+        
 
 def files_loop(root,dirs,files):
-    for file in files:
-        new_file_name = rename_file(file)
-        old_file_full_path = os.path.join(root,file)
-        new_file_full_path = os.path.join(root,new_file_name)
-        print(f'Movendo {file} para {new_file_name}')
-        shutil.move(old_file_full_path, new_file_full_path)
+    try:
+        for file in files:
+            new_file_name = rename_file(file)
+            old_file_full_path = os.path.join(root,file)
+            new_file_full_path = os.path.join(root,new_file_name)
+            print(f'Movendo {file} para {new_file_name}')
+            shutil.move(old_file_full_path, new_file_full_path)
+    except:
+        print(f'{file} , não existe e sera removido')
+        os.replace(old_file_full_path, f"imgdie/{file}")
+        print('Tanferido para IMGDIE')
+        main_loop()
+            
 
 def main_loop():
     for root, dirs, files in os.walk(main_folder):
